@@ -9,16 +9,14 @@ exports.runReconciliation = async (uploadJobId) => {
     uploadJobId: uploadJobId,
   });
 
-  console.log("📊 Records found:", uploadedRecords.length);
-
   const rule = await MatchingRule.findOne();
   const tolerance = rule?.partialMatchTolerance || 0.02;
 
   for (let record of uploadedRecords) {
-    // 🔥 Remove old result to prevent duplicates
+    //  Remove old result to prevent duplicates
     await ReconciliationResult.deleteOne({ recordId: record._id });
 
-    // 1️⃣ Duplicate check
+    //  Duplicate check
     const duplicate = await Record.findOne({
       transactionId: record.transactionId,
       _id: { $ne: record._id },
@@ -32,7 +30,7 @@ exports.runReconciliation = async (uploadJobId) => {
       continue;
     }
 
-    // 2️⃣ Exact match
+    // 2️ Exact match
     const exact = await Record.findOne({
       transactionId: record.transactionId,
       amount: record.amount,
@@ -47,7 +45,7 @@ exports.runReconciliation = async (uploadJobId) => {
       continue;
     }
 
-    // 3️⃣ Partial match
+    // 3️ Partial match
     const partial = await Record.findOne({
       referenceNumber: record.referenceNumber,
       amount: {
@@ -66,12 +64,10 @@ exports.runReconciliation = async (uploadJobId) => {
       continue;
     }
 
-    // 4️⃣ Not matched
+    // 4️ Not matched
     await ReconciliationResult.create({
       recordId: record._id,
       status: "Not Matched",
     });
   }
-
-  console.log("✅ Reconciliation finished");
 };

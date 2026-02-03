@@ -10,7 +10,7 @@ const auditRoutes = require("./routes/auditRoutes");
 
 const app = express();
 app.use(cors());
-app.use(express.json()); // 🔥 THIS FIXES LOGIN BODY ISSUE
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());

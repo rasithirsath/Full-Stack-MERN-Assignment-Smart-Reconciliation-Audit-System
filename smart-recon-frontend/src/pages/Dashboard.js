@@ -60,7 +60,7 @@ export default function Dashboard() {
     }
   };
 
-  // ⭐ SHOW SPINNER WHILE LOADING
+  //  SHOW SPINNER WHILE LOADING
   if (loading) {
     return (
       <div className="flex justify-center items-center h-[60vh]">

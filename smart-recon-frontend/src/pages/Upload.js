@@ -44,7 +44,7 @@ export default function Upload() {
       checkStatus(res.data.jobId);
     } catch (err) {
       if (err.response?.status === 409) {
-        toast.warning("⚠️ This file was already processed. Upload a new file.");
+        toast.warning("This file was already processed. Upload a new file.");
         setProgress(0);
         setFile(null);
         return;

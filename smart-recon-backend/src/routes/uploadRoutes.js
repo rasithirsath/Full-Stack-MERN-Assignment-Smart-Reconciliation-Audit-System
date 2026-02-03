@@ -6,7 +6,6 @@ const upload = require("../middleware/uploadMiddleware");
 
 const uploadController = require("../controllers/uploadController");
 
-// 🔥 DEBUG — ensure functions exist
 console.log("uploadFile:", typeof uploadController.uploadFile);
 console.log("getUploadStatus:", typeof uploadController.getUploadStatus);
 

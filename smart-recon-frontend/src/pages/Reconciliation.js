@@ -174,7 +174,7 @@ function StatusBadge({ status }) {
   return (
     <span
       className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${styles[status] || "bg-gray-100 text-gray-800"}`}
-      style={{ color: "#1f2937" }} // 🔥 FORCE TEXT COLOR
+      style={{ color: "#1f2937" }}
     >
       {status}
     </span>
